@@ -11,6 +11,7 @@
 #include <Wire.h>
 
 // LED on pin 13
+byte led_state = 0;
 const int ledPin = 13;
 
 void setup() {
@@ -19,6 +20,7 @@ void setup() {
 
   // Call receiveEvent when data received
   Wire.onReceive(receiveEvent);
+  Wire.onRequest(requestEvent);
 
   // Setup pin 13 as output and turn LED off
   pinMode(ledPin, OUTPUT);
@@ -29,9 +31,15 @@ void setup() {
 void receiveEvent(int howMany) {
   while (Wire.available()) { // loop through all but the last
     char c = Wire.read(); // receive byte as a character
+    led_state = c;
     digitalWrite(ledPin, c);
   }
 }
+
+void requestEvent() {
+  Wire.write(led_state);
+}
+
 void loop() {
   delay(100);
 }
