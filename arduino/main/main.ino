@@ -70,7 +70,12 @@ void setup() {
   pinMode(ledPin, OUTPUT);
   pinMode(fetPin, OUTPUT);
   pinMode(btnPin, INPUT_PULLUP);
-  digitalWrite(ledPin, LOW);
+  for(int i=0; i<10; i++) {
+    delay(50);
+    digitalWrite(ledPin, HIGH);
+    delay(50);
+    digitalWrite(ledPin, LOW);
+  }
   digitalWrite(fetPin, LOW);
 
   wait_for_address();
