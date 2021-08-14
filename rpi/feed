@@ -1,0 +1,39 @@
+#!/bin/sh
+
+is_closed() {
+	local _module_addr="${1}"
+	local _ret
+	_ret="$(./i2c get "${_module_addr}")"
+	if test "${_ret}" = 0; then
+		printf 'true\n'
+	else
+		printf 'false\n'
+	fi
+}
+
+main() {
+	local _open_module="${c_modules}"
+	local _is_open
+	for i in $(seq 1 "${c_modules}" | tac); do
+		if ! _cur_is_closed="$(is_closed "${i}")"; then
+			printf 'module %s is unavailable\n' "${i}" >&2
+			exit 1
+		fi
+
+		if "${_cur_is_closed}"; then
+			printf 'opening module %s\n' "${_open_module}"
+			./i2c set "${_open_module}" 1
+			exit 0
+		fi
+	done
+
+	printf 'All modules are already open\n' >&2
+	exit 1
+}
+
+set -e
+set -u
+
+c_modules=1
+
+main
