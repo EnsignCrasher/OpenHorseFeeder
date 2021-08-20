@@ -3,7 +3,7 @@
 is_closed() {
 	local _module_addr="${1}"
 	local _ret
-	_ret="$(./i2c get "${_module_addr}")"
+	_ret="$(i2c get "${_module_addr}")"
 	if test "${_ret}" = 0; then
 		printf 'true\n'
 	else
@@ -25,7 +25,7 @@ main() {
 		fi
 
 		printf 'opening module %s\n' "${i}"
-		./i2c set "${i}" 1
+		i2c set "${i}" 1
 		sleep 3
 		_cur_is_closed="$(is_closed "${i}")"
 		if "${_cur_is_closed}"; then
