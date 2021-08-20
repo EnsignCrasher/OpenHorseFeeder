@@ -1,5 +1,17 @@
 #!/bin/sh
 
+i2c_fake() {
+	case "${1}" in
+		get)
+			printf 'press 0 to return module closed or 1 for module open\n' >&2
+			local _var
+			read -r _var
+			printf '%s\n' "${_var}"
+			return
+			;;
+	esac
+}
+
 is_closed() {
 	local _module_addr="${1}"
 	local _ret
@@ -41,5 +53,17 @@ main() {
 
 set -e
 set -u
+
+while :; do
+	case "${1-}" in
+		--dryrun)
+			i2c() { i2c_fake "$@"; }
+			shift
+			;;
+		*)
+			break
+			;;
+	esac
+done
 
 main
