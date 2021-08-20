@@ -12,19 +12,27 @@ is_closed() {
 }
 
 main() {
-	local _open_module="${c_modules}"
-	local _is_open
-	for i in $(seq 1 "${c_modules}" | tac); do
+	local _first=48
+	local _last=53
+	for i in $(seq "${_first}" "${_last}" | tac); do
 		if ! _cur_is_closed="$(is_closed "${i}")"; then
 			printf 'module %s is unavailable\n' "${i}" >&2
 			exit 1
 		fi
 
-		if "${_cur_is_closed}"; then
-			printf 'opening module %s\n' "${_open_module}"
-			./i2c set "${_open_module}" 1
-			exit 0
+		if ! "${_cur_is_closed}"; then
+			continue
 		fi
+
+		printf 'opening module %s\n' "${i}"
+		./i2c set "${i}" 1
+		sleep 3
+		_cur_is_closed="$(is_closed "${i}")"
+		if "${_cur_is_closed}"; then
+			printf 'module %s got stuck\n' "${i}" >&2
+			exit 1
+		fi
+		exit 0
 	done
 
 	printf 'All modules are already open\n' >&2
@@ -33,7 +41,5 @@ main() {
 
 set -e
 set -u
-
-c_modules=1
 
 main
