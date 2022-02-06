@@ -53,12 +53,47 @@ level shifter is needed to fix this.
 
 ![](docs/main-module.jpg)
 
-floor module
---------------
+Floor Module
+=============
 
 The electric lock has a sensor which triggers when the hook is opened. This is
 a simple switch connected to the green and white wire.
 
+Also the module uses the serial interface to find it's position.
+During initialization, the module will start at position 0 and print that on TX.
+If the next modules recieves something on RX, it will increment that by one and
+also write that to TX.
+That way each module in the string can find out it's position with the first one
+having the lowest position.
+
+Wiring
+------
+
+Arduino pin|part
+:---------:|:-------------:
+10         |IFRZ44N Gate
+2          |lock white wire (switch)
+RX         |pos in
+TX         |pos out
+SCL        |SCL
+SDA        |SDA
+
+
 Image                       |Wiring diagram
 :--------------------------:|:---------------------------:
 ![](docs/floor-module.jpg)  | ![](docs/wiring-diagram.jpg)
+
+Flashing
+--------
+
+Nothing special here, just flash the code to the Pro Mini using your favourite
+method (i.e. Arduino IDE). To do his connect the device's serial with your pc
+with an USB-TTL converter. When you hit the upload button in the Arduino IDE and
+it says "uploading..." in the log box at the bottom, you need to hit the reset
+button real quick to make it work.
+
+Make sure your module isn't connected to any already flashed module, as this
+pollutes the serial communication.
+
+After flashing you should be able to put the module into any location, as it
+finds it's position in the string automatically.
