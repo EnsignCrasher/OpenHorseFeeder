@@ -83,6 +83,28 @@ Image                       |Wiring diagram
 :--------------------------:|:---------------------------:
 ![](docs/floor-module.jpg)  | ![](docs/wiring-diagram.jpg)
 
+
+Wire lengths for mass production
+--------------------------------
+
+As long as there is no PCB for this modules, here is a list of all wires for
+quick preparation:
+
+Size (AWG)|Color |Total Length|Middle stripped part
+:--------:|:----:|:----------:|:------------------:
+22        |Red   |80mm        |-
+22        |Red   |170mm       |72mm
+22        |Black |170mm       |72mm
+28        |Yellow|170mm       |72mm
+28        |Black |170mm       |72mm
+28        |Yellow|120mm       |-
+28        |Yellow|120mm       |-
+28        |Yellow|80mm        |-
+28        |Black |80mm        |-
+
+![](docs/floor-module-wire-lengths.jpg)
+
+
 Flashing
 --------
 
