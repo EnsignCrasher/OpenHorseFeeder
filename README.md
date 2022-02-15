@@ -104,6 +104,28 @@ Size (AWG)|Color |Total Length|Middle stripped part
 
 ![](docs/floor-module-wire-lengths.jpg)
 
+Wire length for inter-module connections
+-----------------------------------------
+
+Usually you don't want your modules to be mounted in one line, as the floor from
+above would hit the module underneath it. So your modules will usually be slightly
+shifted at each floor.
+
+To calculate the connection wire length according to the image below, you can
+use this formula:
+
+```
+l = d - b + a
+```
+
+for a distance between the floors of 300mm it would be:
+
+```
+l = 300mm - 90mm + 120mm = 330mm
+```
+
+![](docs/module-conn-wire-length.png)
+
 
 Flashing
 --------
