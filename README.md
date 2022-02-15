@@ -12,12 +12,6 @@ For this one main module based on a Raspberry Pi Zero is used. Each electric
 lock is then controlled by an Arduino Pro Mini which opens the lock and reports
 the locks status to the main module with I2C.
 
-Electrics
-=========
-The main module uses an external 12V power supply. This will be used to drive
-the 12V electric locks. For the Raspberry Pi and Arduinos a step-down converter
-to 5V is build into the main module.
-
 Parts needeed
 =============
 
@@ -31,8 +25,11 @@ Parts needeed
 - [1 per module: IRFZ44N MOSFET](https://www.amazon.de/Youmile-Transistor-N-Channel-International-Rectifier/dp/B07QGNBJDF/ref=sr_1_3_sspa)
 - [1 per module: electric lock](https://www.amazon.de/-/en/Electric-Electromagnetic-Locking-Cabinet-Emergency/dp/B07KWMH16C/ref=sr_1_9)
 
-Wiring
-======
+Electrics
+=========
+The main module uses an external 12V power supply. This will be used to drive
+the 12V electric locks. For the Raspberry Pi and Arduinos a step-down converter
+to 5V is build into the main module.
 
 Modules Connectors
 ------------------
@@ -45,8 +42,8 @@ Incoming                    |Outgoing
 :--------------------------:|:---------------------------:
 ![](docs/mpx-in-pinout.jpg) | ![](docs/mpx-out-pinout.jpg)
 
-main module
------------
+Main Module
+===========
 
 The Raspberry Pi uses 3.3V level for I2C and the Arduino uses 5V, therefore a
 level shifter is needed to fix this.
@@ -83,9 +80,26 @@ Image                       |Wiring diagram
 :--------------------------:|:---------------------------:
 ![](docs/floor-module.jpg)  | ![](docs/wiring-diagram.jpg)
 
+Flashing
+--------
+
+Nothing special here, just flash the code to the Pro Mini using your favourite
+method (i.e. Arduino IDE). To do this connect the device's serial with your pc
+with an USB-TTL converter. When you hit the upload button in the Arduino IDE and
+it says "uploading..." in the log box at the bottom, you need to hit the reset
+button real quick to make it work.
+
+Make sure your module isn't connected to any already flashed module, as this
+pollutes the serial communication.
+
+After flashing you should be able to put the module into any location, as it
+finds it's position in the string automatically.
 
 Wire lengths for mass production
---------------------------------
+=================================
+
+Floor module
+------------
 
 As long as there is no PCB for this modules, here is a list of all wires for
 quick preparation:
@@ -104,8 +118,8 @@ Size (AWG)|Color |Total Length|Middle stripped part
 
 ![](docs/floor-module-wire-lengths.jpg)
 
-Wire length for inter-module connections
------------------------------------------
+inter-module connections
+------------------------
 
 Usually you don't want your modules to be mounted in one line, as the floor from
 above would hit the module underneath it. So your modules will usually be slightly
@@ -125,19 +139,3 @@ l = 300mm - 90mm + 120mm = 330mm
 ```
 
 ![](docs/module-conn-wire-length.png)
-
-
-Flashing
---------
-
-Nothing special here, just flash the code to the Pro Mini using your favourite
-method (i.e. Arduino IDE). To do his connect the device's serial with your pc
-with an USB-TTL converter. When you hit the upload button in the Arduino IDE and
-it says "uploading..." in the log box at the bottom, you need to hit the reset
-button real quick to make it work.
-
-Make sure your module isn't connected to any already flashed module, as this
-pollutes the serial communication.
-
-After flashing you should be able to put the module into any location, as it
-finds it's position in the string automatically.
