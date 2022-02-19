@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+set -u
+
+export PATH="${PATH}:/usr/bin"
+
+printf "Content-type: text/html\n\n"
+
+printf 'feed times (UTC):<br>'
+awk '{print $2":"$1"<br>"}' /home/pi/.config/cronctl/crontab.d/* | sort
