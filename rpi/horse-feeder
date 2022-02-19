@@ -23,7 +23,25 @@ is_closed() {
 	fi
 }
 
-main() {
+run_status() {
+	printf 'module\tstate<br>'
+	for i in $(seq 48 53); do
+		printf '%s\t' "${i}"
+		local _state
+		_state="$(/usr/bin/i2c get "${i}")"
+		case "${_state}" in
+			0)
+				#printf '\e[1;32mclosed\e[0m\n'
+				printf 'closed<br>'
+				;;
+			1)
+				printf 'open<br>'
+				;;
+		esac
+	done
+}
+
+run_feed() {
 	local _first=48
 	local _last=53
 	for i in $(seq "${_first}" "${_last}" | tac); do
@@ -66,4 +84,4 @@ while :; do
 	esac
 done
 
-main
+run_"${1?Missing mode}"

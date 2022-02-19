@@ -1,6 +1,6 @@
 prefix ?= /usr
 I2C_BINARY=i2c
-FEED_BINARY=feed
+FEED_BINARY=horse-feeder
 
 #install: $(I2C_BINARY)
 
