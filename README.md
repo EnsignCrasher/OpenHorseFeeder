@@ -139,3 +139,15 @@ l = 300mm - 90mm + 120mm = 330mm
 ```
 
 ![](docs/module-conn-wire-length.png)
+
+Future improvements
+===================
+
+Preparing cables with MPX connectors is a very labour intensive task, it maybe
+be better to use network cables for this. It may be possible to use connectors
+like [this](https://www.amazon.de/dp/B07G2BR8HQ/ref=cm_sw_r_apan_glt_i_02XD9R9ZNHF0BPCT05TW)
+to build into the modules. Wiring this thing would be mostly done with a network
+cable tool which is a lot quicker than stripping and soldering all the cables.
+
+Also the wiring would be a lot less messy, you would simply connect the to plugs and then
+the appropriate part in the module.
