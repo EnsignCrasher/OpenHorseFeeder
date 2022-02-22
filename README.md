@@ -12,6 +12,9 @@ For this one main module based on a Raspberry Pi Zero is used. Each electric
 lock is then controlled by an Arduino Pro Mini which opens the lock and reports
 the locks status to the main module with I2C.
 
+> NOTE: Right now this approach isn't optimized for power consumption. If you are looking for a low power off-the-grid solution this
+project may be interesting for you: https://github.com/EeroVakiparta/Feed-O-Pony
+
 Parts needeed
 =============
 
