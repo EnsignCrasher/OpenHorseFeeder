@@ -1,5 +1,19 @@
 #!/bin/sh
 
+retry() {
+	local _max=5
+	local _count=0
+	while ! "$@"; do
+		printf '"%s" failed, retrying...\n' "$*" >&2
+		if test "${_count}" -ge "${_max}"; then
+			printf 'giving up after %s tries\n' "${_max}" >&2
+			return 1
+		fi
+		sleep 5
+		_count="$((_count + 1))"
+	done
+}
+
 i2c_fake() {
 	case "${1}" in
 		get)
@@ -15,7 +29,7 @@ i2c_fake() {
 is_closed() {
 	local _module_addr="${1}"
 	local _ret
-	_ret="$(i2c get "${_module_addr}")"
+	_ret="$(retry /usr/bin/i2c get "${_module_addr}")"
 	if test "${_ret}" = 0; then
 		printf 'true\n'
 	else
@@ -28,7 +42,7 @@ run_status() {
 	for i in $(seq 48 53); do
 		printf '%s\t' "${i}"
 		local _state
-		_state="$(/usr/bin/i2c get "${i}")"
+		_state="$(retry /usr/bin/i2c get "${i}")"
 		case "${_state}" in
 			0)
 				#printf '\e[1;32mclosed\e[0m\n'
@@ -55,7 +69,7 @@ run_feed() {
 		fi
 
 		printf 'opening module %s\n' "${i}"
-		i2c set "${i}" 1
+		retry /usr/bin/i2c set "${i}" 1
 		sleep 3
 		_cur_is_closed="$(is_closed "${i}")"
 		if "${_cur_is_closed}"; then
