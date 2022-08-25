@@ -1,0 +1,13 @@
+Source: i2cctl
+Section: devel
+Priority: optional
+Maintainer: Julian Heuking <jheuking@googlemail.com>
+Build-Depends: debhelper (>=11~)
+Standards-Version: 4.1.4
+
+Package: i2cctl
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Description: read/write from/to i2c devices
+ This tool provides methods to read/write data from/to i2c devices.

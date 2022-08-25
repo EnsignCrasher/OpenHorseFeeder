@@ -1,0 +1,16 @@
+Source: openhorsefeeder
+Section: admin
+Priority: optional
+Maintainer: Julian Heuking <jheuking@googlemail.com>
+Build-Depends: debhelper (>=11~)
+Standards-Version: 4.1.4
+
+Package: openhorsefeeder
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+ i2cctl
+Description: Tool to control modules in openhorsefeeder hay cabins.
+ This tool provides methods to read/set the state of single modules in a hay
+ cabin. It also provides methods to open just the lowest floor which can be
+ used in cronjobs.

@@ -1,0 +1,5 @@
+i2cctl (0.0.1-1) buster; urgency=medium
+
+  * Initial release. (Closes: #XXXXXX)
+
+ -- Julian Heuking <jheuking@googlemail.com>  Thu, 19 Aug 2021 17:25:18 +0200
